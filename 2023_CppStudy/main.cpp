@@ -1,3 +1,13 @@
+// define 전처리: 가독성, 유지보수 용이
+#define HUNGRY    0x0001
+#define THIRSTY   0x0002
+#define TIRED     0x0004
+#define BURNING   0x0008
+#define FROZEN    0x0010
+#define POISON    0x0020
+
+#define MAX_SIZE      20
+
 // 주석: 설명 역할, 코드로 인식되지 않는다.
 
 int main()
@@ -114,4 +124,28 @@ int main()
 	{
 		data = 80;
 	}
+
+	// 비트 연산자: <<, >>, ~(REVERSE), &(AND), |(OR), ^(XOR)
+	// ~: 0은 1으로, 1은 0으로
+	// &: 둘 다 1인 경우 1
+	// |: 적어도 하나가 1인 경우 1
+	// ^: 같으면 0, 다르면 1
+	unsigned char byte = 8;
+
+	byte <<= 2; // 2^n를 곱한다.
+	byte >>= 3; // 2^n로 나눈다.
+
+	unsigned int status = HUNGRY; // status = 1;
+
+	// 상태 추가
+	status |= THIRSTY;
+
+	// 상태 확인
+	if (status & THIRSTY)
+	{
+
+	}
+
+	// 특정 자리 비트 제거
+	status &= ~THIRSTY;
 }
