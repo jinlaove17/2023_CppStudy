@@ -88,4 +88,30 @@ int main()
 	{
 		data /= 5;
 	}
+	
+	// switch case
+	// 정수나 열거형 계열만 사용 가능
+	switch (5)
+	{
+	case 10:
+	case 20:
+		break;
+	case 30:
+		break;
+	default:
+		break;
+	}
+
+	// 삼항 연산자
+	data = (data == 20) ? 50 : 80;
+
+	// 같은 의미
+	if (data == 20)
+	{
+		data = 50;
+	}
+	else
+	{
+		data = 80;
+	}
 }
