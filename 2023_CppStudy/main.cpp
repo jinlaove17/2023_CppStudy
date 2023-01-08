@@ -37,6 +37,8 @@ int main()
 	// 대입 연산자: =
 	// 산술 연산자: +, -, *, /, %(피연산자가 모두 정수인 경우에만 사용 가능)
 	// 증감 연산자: ++, --
+	// 논리 연산자: !(REVERSE), &&(AND), ||(OR)
+	// 참: true, 0이 아닌 값으로 주로 1, 거짓: false, 0
 	int data = 10 + 10;
 
 	// data = data + 20;
@@ -60,4 +62,14 @@ int main()
 	data = a++; // data는 10
 
 	// 웬만하면 전위 연산자를 사용하자.(클래스 연산자 오버로딩의 경우 복사가 일어날 수 있기 때문에)
+
+	bool truefalse = true;
+	bool isTrue = 100; // true
+
+	isTrue = !truefalse;
+
+	int n = 100;
+	
+	n = !n;
+	n = 0 && 200;
 }
