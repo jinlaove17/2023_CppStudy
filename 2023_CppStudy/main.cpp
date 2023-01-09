@@ -1,37 +1,12 @@
 #include <stdio.h>
 
-int RecursiveFactorial(int n);
-int RecursiveFibonacci(int n);
-
 int main()
 {
-	// 재귀 함수: 가독성, 구현 용이, 성능 저하
-	int n = RecursiveFactorial(10);
+	// 배열: 메모리가 연속적
+	int arr[] = { 1, 2, 3, 4 };
 
-	printf("%d\n", n);
+	// Out of index
+	// arr[4] = 4;
 
-	n = RecursiveFibonacci(10);
-
-	printf("%d\n", n);
-}
-
-int RecursiveFactorial(int n)
-{
-	if (n == 1)
-	{
-		return 1;
-	}
-
-	return n * RecursiveFactorial(n - 1);
-}
-
-// 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...
-int RecursiveFibonacci(int n)
-{
-	if (n == 1 || n == 2)
-	{
-		return 1;
-	}
-
-	return RecursiveFibonacci(n - 1) + RecursiveFibonacci(n - 2);
+	// 인덱스는 0부터 배열의 크기 - 1까지
 }
