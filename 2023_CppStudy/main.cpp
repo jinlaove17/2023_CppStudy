@@ -1,12 +1,37 @@
 #include <stdio.h>
 
+// 구조체: 사용자 정의 자료형
+struct INFO
+{
+	int   m_age;
+	float m_height;
+	float m_weight;
+};
+
+struct NEW_INFO
+{
+	INFO m_info;
+	int  m_iq;
+};
+
+// C 문법 구조체
+typedef struct NewStruct
+{
+	int m_a;
+	int m_b;
+} NEWSTRUCT;
+
 int main()
 {
-	// 배열: 메모리가 연속적
-	int arr[] = { 1, 2, 3, 4 };
+	// 구조체 초기화
+	INFO info = { 10, 150.0f, 50.0f };
 
-	// Out of index
-	// arr[4] = 4;
+	// 구조체 멤버 변수값 변경
+	info.m_age = 26;
+	info.m_height = 180.0f;
+	info.m_weight = 70.0f;
 
-	// 인덱스는 0부터 배열의 크기 - 1까지
+	int size = sizeof(INFO);
+
+	printf("%d\n", size);
 }
