@@ -10,6 +10,10 @@
 
 // 주석: 설명 역할, 코드로 인식되지 않는다.
 
+int global;
+
+int Add(int a, int b);
+
 int main()
 {
 	// 자료형(Data Type), 크기 단위: 바이트(byte)
@@ -148,4 +152,28 @@ int main()
 
 	// 특정 자리 비트 제거
 	status &= ~THIRSTY;
+
+	// 변수
+	// 1. 지역 변수
+	// 2. 전역 변수
+	// 3. 정적 변수
+	// 4. 외부 변수
+
+	// 함수
+	data = Add(10, 20);
+
+	// 지역
+	{
+		// 우선순위가 더 높다.
+		int data = Add(30, 40);
+
+		{
+			int data = Add(50, 60);
+		}
+	}
+}
+
+int Add(int a, int b)
+{
+	return a + b;
 }
