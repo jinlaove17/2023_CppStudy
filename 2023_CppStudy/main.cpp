@@ -1,37 +1,38 @@
 #include <stdio.h>
 
-// 구조체: 사용자 정의 자료형
-struct INFO
-{
-	int   m_age;
-	float m_height;
-	float m_weight;
-};
+// <변수의 종류>
+// 1. 지역 변수
+// 2. 전역 변수
+// 3. 정적 변수(static)
+// 4. 외부 변수(extern)
 
-struct NEW_INFO
-{
-	INFO m_info;
-	int  m_iq;
-};
+// <메모리 영역>
+// 1. 코드 영역
+// 2. 데이터 영역: 프로그램 시작시 생성되어, 종료시 해제된다. (ex: 전역 변수, 정적 변수, 외부 변수)
+// 3. 스택 영역: 함수 내에서 생성되어 함수 종료시 해제된다. (ex: 지역 변수, 매개 변수)
+// 4. 힙 영역
 
-// C 문법 구조체
-typedef struct NewStruct
+int global;
+
+void Test1()
 {
-	int m_a;
-	int m_b;
-} NEWSTRUCT;
+	int i = 0;
+
+	++i;
+}
+
+void Test2()
+{
+	++global;
+}
 
 int main()
 {
-	// 구조체 초기화
-	INFO info = { 10, 150.0f, 50.0f };
+	// 아래와 같이 Test1() 함수를 여러 번 호출해도 지역 변수 i는 스택영역에 매번 새롭게 생성되고 해제된다.
+	Test1();
+	Test1();
+	Test1();
 
-	// 구조체 멤버 변수값 변경
-	info.m_age = 26;
-	info.m_height = 180.0f;
-	info.m_weight = 70.0f;
-
-	int size = sizeof(INFO);
-
-	printf("%d\n", size);
+	// 위와 달리, Test2() 함수는 전역 변수를 증가시키므로, 3번 증가한다.
+	Test2();
 }
