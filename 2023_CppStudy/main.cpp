@@ -1,46 +1,26 @@
 #include <stdio.h>
 
-// 파일 분리: 가독성 및 유지 보수 향상
-#include "func.h"
-#include "common.h"
-
-// 전역 변수(global)
-int n;
-
-// 정적 변수(static): 전역 변수와 유사하나, 오히려 접근을 파일, 함수, 클래스 등으로 제한함으로써 유지보수나 안정성을 올릴 수 있다.
-static int m;
-
-// 외부 변수(extern): common.h에 선언되어 있으며, 최초로 초기화가 필요하다.
-int externValue = 0;
-
-int Test()
-{
-	static int i = 0;
-
-	return ++i;
-}
-
 int main()
 {
-	Test();
-	Test();
+	int i = 0;
 
-	int callCount = Test();
+	// 포인터 변수: 주소를 저장하는 변수로 *앞의 자료형으로 해석한다.
+	int* p = &i;
 
-	printf("Test() 함수 호출 횟수: %d\n", callCount);
+	// 포인터 역참조
+	*p = 1;
 
-	// * 헤더 파일에 정의된 정적 변수를 각 파일에서 사용하는 예시
-	staticValue = 100;
+	// 주소는 바이트(byte) 단위로 존재한다.
+	// 포인터가 int*, float* 등의 자료형으로 나뉘는 이유는 해당 주소를 쫓아가서 각각 int, float의 크기 만큼을 읽겠다는 것을 뜻한다.
+	// 또한 정수와 실수 등 표현 방식이 다르기 때문에 타입별로 포인터를 나눈다.
 
-	// F12: 정의로 이동 -> 또 누를시, 선언으로 이동
-	int j = Add(10, 20);
+	// 아래와 같이 강제로 캐스팅하여 int*에 float의 주소를 넣는 경우 실수 표현 방식으로 표현된 곳을 정수 표현 방식으로 4바이트만큼 읽어들여 이상한 값이 나올 것이다.
+	// 위 문제는 앞서 배운 것처럼 unsigned char형 변수에 -1을 넣는 경우(-1은 2진법으로 1111 1111이다.) 255로 변하는 것과 같이 자료형에 따라 해석하는 것과 유사하다.
+	float f = 3.14f;
 
-	printf("staticValue: %d\n", staticValue);
+	// int*(정수 표현 방식)에 float 주소를 강제 캐스팅
+	p = (int*)&f;
 
-	// * 헤더 파일에 정의된 외부 변수를 각 파일에서 사용하는 예시
-	externValue = 200;
-
-	int k = Sub(20, 10);
-
-	printf("externValue: %d\n", externValue);
+	// 3.14f를 정수 표현 방식으로 4바이트만큼 해석한 값이 출력될 것이다.
+	printf("%d\n", *p);
 }
