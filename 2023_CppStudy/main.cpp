@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+void Test1(int a);
+void Test2(int* a);
+
 int main()
 {
 	int i = 0;
@@ -46,4 +49,43 @@ int main()
 		// int 포인터이기 때문에 +1을 할 때마다 4Byte씩 증가한 위치로 이동한다.
 		printf("%d ", *(arr + i)); // arr[i]
 	}
+	printf("\n");
+
+	// 포인터 이해 확인 문제
+	// 문제 1.
+	short arr1[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	int* u = (int*)&arr1;
+	int data = *((short*)(u + 2));
+
+	printf("1번 문제 정답: %d\n", data);
+
+	// 문제 2.
+	char arr2[2] = { 1, 1 };
+	short* s = (short*)arr2;
+
+	data = *s;
+
+	printf("2번 문제 정답: %d\n", data);
+
+	// 문제 3.
+	int a = 100;
+
+	Test1(a);
+
+	printf("3번 문제 정답: %d\n", a);
+
+	// 문제 4.
+	Test2(&a);
+
+	printf("4번 문제 정답: %d\n", a);
+}
+
+void Test1(int a)
+{
+	a = 500;
+}
+
+void Test2(int* a)
+{
+	*a = 500;
 }
