@@ -1,103 +1,42 @@
 #include <iostream>
+#include <vector>
+#include <list>
 
-// 'std'라는 namespace를 사용하겠다.(생략하도록 만들겠다.)
-// using namespace std;
-
-// 특정 기능만 namespace를 사용하겠다.(생략하도록 만들겠다.)
-using std::cout;
-using std::wcout; // 2바이트
-using std::cin;
-using std::endl;
-
-namespace MYSPACE
-{
-	int i;
-}
-
-namespace OTHERSPACE
-{
-	int i;
-}
-
-class CTest
-{
-public:
-	// 객체 없이 호출 가능한 함수
-	static void Test()
-	{
-	}
-};
-
-class COstream
-{
-public:
-	COstream& operator <<(int data)
-	{
-		wprintf(L"%d", data);
-
-		return *this;
-	}
-
-	COstream& operator <<(const wchar_t* data)
-	{
-		wprintf(L"%s", data);
-
-		return *this;
-	}
-
-	COstream& operator <<(void(*f)())
-	{
-		f();
-
-		return *this;
-	}
-};
-
-class CIstream
-{
-public:
-	CIstream& operator >>(int& data)
-	{
-		scanf_s("%d", &data);
-
-		return *this;
-	}
-};
-
-// 멤버 변수가 없는 클래스는 1바이트 크기를 갖는다.
-COstream myCout;
-CIstream myCin;
-
-void myEndl();
+using namespace std;
 
 int main()
 {
-	// 지역 언어 설정
-	setlocale(LC_ALL, "korean");
-	_wsetlocale(LC_ALL, L"korean");
+	vector<int> v;
+	int size = v.size();
+	int capacity = v.capacity();
 
-	// :: - 범위 지정 연산자
-	CTest::Test();
+	v.reserve(3);
+	v.push_back(10);
+	v.push_back(20);
+	v.push_back(30);
 
-	// namespace를 통해 동일한 변수명을 구분지을 수 있다.
-	MYSPACE::i = 10;
-	OTHERSPACE::i = 20;
+	v[0] *= 1.5;
 
-	myCout << 10 << 20 << 30 << myEndl;
-	myCout << L"한글" << myEndl;
+	for (int i = 0; i < v.size(); ++i)
+	{
+		cout << v[i] << endl;
+	}
+	cout << endl;
 
-	int a = 0;
+	list<int> l;
 
-	myCin >> a;
+	l.push_back(10);
+	l.push_front(20);
+	l.push_back(30);
 
-	wprintf(L"%d\n", a);
+	// 반복자(iterator)
+	list<int>::iterator iter = l.begin();
 
-	cout << &MYSPACE::i << '\n';
-	cout << &myCout << '\n';
-	cout << &a << '\n';
-}
-
-void myEndl()
-{
-	wprintf(L"\n");
+	for (; iter != l.end(); ++iter)
+	{
+		// 반복자 패턴에는 operator *가 오버로딩 되어있다.
+		// 이 연산자를 통해 실제 값에 접근할 수 있다.
+		cout << *iter << endl;
+	}
+	cout << endl;
 }
