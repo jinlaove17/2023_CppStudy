@@ -1,34 +1,103 @@
 #include <iostream>
 
-// 함수를 비로소 호출할 때 타입이 결정된다.
-// 다시 말해 함수가 아닌 하나의 틀이다.
-template<typename T>
-T Add(T a, T b)
+// 'std'라는 namespace를 사용하겠다.(생략하도록 만들겠다.)
+// using namespace std;
+
+// 특정 기능만 namespace를 사용하겠다.(생략하도록 만들겠다.)
+using std::cout;
+using std::wcout; // 2바이트
+using std::cin;
+using std::endl;
+
+namespace MYSPACE
 {
-	return a + b;
+	int i;
 }
 
-template<typename T>
-class CInfo
+namespace OTHERSPACE
 {
-private:
-	T m_data;
+	int i;
+}
 
+class CTest
+{
 public:
-	CInfo(T data) :
-		m_data(data)
+	// 객체 없이 호출 가능한 함수
+	static void Test()
 	{
 	}
 };
 
+class COstream
+{
+public:
+	COstream& operator <<(int data)
+	{
+		wprintf(L"%d", data);
+
+		return *this;
+	}
+
+	COstream& operator <<(const wchar_t* data)
+	{
+		wprintf(L"%s", data);
+
+		return *this;
+	}
+
+	COstream& operator <<(void(*f)())
+	{
+		f();
+
+		return *this;
+	}
+};
+
+class CIstream
+{
+public:
+	CIstream& operator >>(int& data)
+	{
+		scanf_s("%d", &data);
+
+		return *this;
+	}
+};
+
+// 멤버 변수가 없는 클래스는 1바이트 크기를 갖는다.
+COstream myCout;
+CIstream myCin;
+
+void myEndl();
+
 int main()
 {
-	// <함수 템플릿>
-	// - 기능이 유사한데 매개 변수의 자료형 때문에 함수를 여러개 만드는 경우를 해결하기 위한 방법
-	Add<int>(5, 10); // 생략 가능 Add(5, 10);
+	// 지역 언어 설정
+	setlocale(LC_ALL, "korean");
+	_wsetlocale(LC_ALL, L"korean");
 
-	// <클래스 템플릿>
-	// - 필요에 따라 템플릿은 클래스에도 적용할 수 있다.
-	// - 클래스 템플릿의 멤버 함수는 반드시 헤더 파일에 정의되어야 한다.
-	CInfo<int> info(5);
+	// :: - 범위 지정 연산자
+	CTest::Test();
+
+	// namespace를 통해 동일한 변수명을 구분지을 수 있다.
+	MYSPACE::i = 10;
+	OTHERSPACE::i = 20;
+
+	myCout << 10 << 20 << 30 << myEndl;
+	myCout << L"한글" << myEndl;
+
+	int a = 0;
+
+	myCin >> a;
+
+	wprintf(L"%d\n", a);
+
+	cout << &MYSPACE::i << '\n';
+	cout << &myCout << '\n';
+	cout << &a << '\n';
+}
+
+void myEndl()
+{
+	wprintf(L"\n");
 }
