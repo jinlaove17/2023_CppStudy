@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <cassert>
 
 template<typename T>
@@ -115,6 +114,42 @@ public:
 
 		m_data[m_size++] = data;
 	}
+
+	iterator erase(iterator& iter)
+	{
+		// 다른 컨테이너를 가리키는 반복자이거나 end 반복자인경우
+		assert(this == iter.m_dynamicArray && end() != iter);//&& iter.m_index < m_size);
+
+		// 무효한 반복자로 변경
+		iter.m_isValid = false;
+
+		// end 바로 앞 반복자인 경우
+		if (iter.m_index == m_size - 1)
+		{
+			// 크기 감소
+			--m_size;
+
+			return iterator(this, m_data, -1);
+		}
+
+		// iter가 가리키는 데이터를 배열 내에서 제거한다.
+		int loopCount = m_size - (iter.m_index + 1);
+
+		for (int i = 0; i < loopCount; ++i)
+		{
+			m_data[iter.m_index + i] = m_data[iter.m_index + i + 1];
+		}
+
+		// 크기 감소
+		--m_size;
+
+		return iterator(this, m_data, iter.m_index);
+	}
+
+	void clear()
+	{
+		m_size = 0;
+	}
 };
 
 template<typename T>
@@ -130,20 +165,27 @@ private:
 	// 이 값을 저장하는 이유는 m_dynamicArray에서 힙 영역을 재할당할 시에 m_data의 시작 주소가 변경될 것인데 이 값과
 	// 이 클래스(반복자)가 가지고 있는 m_data를 비교했을 때, 다르다면 이 반복자는 재할당 이전의 힙 영역을 가리키는 유효하지 않은 것으로 판단할 수 있다.
 	T*				  m_data;
-
 	int				  m_index;
+
+	// 이 반복자(클래스)가 유효한지에 대한 변수
+	bool			  m_isValid;
 
 public:
 	CDynamicArrayIterator(CDynamicArray<T>* dynamicArray, T* data, int index) :
 		m_dynamicArray(dynamicArray),
 		m_data(data),
-		m_index(index)
+		m_index(index),
+		m_isValid(false)
 	{
+		if (nullptr != m_dynamicArray && -1 <= m_index)
+		{
+			m_isValid = true;
+		}
 	}
 
 	T& operator *()
 	{
-		assert(m_dynamicArray->m_data == m_data && m_index >= 0);
+		assert(m_dynamicArray->m_data == m_data && m_index >= 0 && true == m_isValid);
 
 		return m_data[m_index];
 	}
