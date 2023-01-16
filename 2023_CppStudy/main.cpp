@@ -1,42 +1,32 @@
 #include <iostream>
-#include <vector>
-#include <list>
+
+#include "DynamicArray.h"
 
 using namespace std;
 
 int main()
 {
-	vector<int> v;
-	int size = v.size();
-	int capacity = v.capacity();
+	CDynamicArray<int> dynamicArray;
 
-	v.reserve(3);
-	v.push_back(10);
-	v.push_back(20);
-	v.push_back(30);
+	dynamicArray.push_back(10);
+	dynamicArray.push_back(20);
+	dynamicArray.push_back(30);
 
-	v[0] *= 1.5;
-
-	for (int i = 0; i < v.size(); ++i)
+	for (auto iter = dynamicArray.begin(); iter != dynamicArray.end(); iter++)
 	{
-		cout << v[i] << endl;
+		cout << *iter << ' ';
 	}
 	cout << endl;
 
-	list<int> l;
+	// 직접 만든 이터레이터를 사용해보자.
+	CDynamicArray<int>::iterator iter = dynamicArray.begin();
 
-	l.push_back(10);
-	l.push_front(20);
-	l.push_back(30);
+	cout << *(iter++) << endl;
+	cout << *(--iter) << endl;
+	cout << *(++iter) << endl;
+	cout << *(iter++) << endl;
+	cout << *iter << endl;
 
-	// 반복자(iterator)
-	list<int>::iterator iter = l.begin();
-
-	for (; iter != l.end(); ++iter)
-	{
-		// 반복자 패턴에는 operator *가 오버로딩 되어있다.
-		// 이 연산자를 통해 실제 값에 접근할 수 있다.
-		cout << *iter << endl;
-	}
-	cout << endl;
+	// 연산자 우선순위에 의하여 아래 구문은 위와 다른 결과를 출력할 것이다.
+	//cout << *(iter++) << ' ' << *(--iter) << ' ' << *(++iter) << ' ' << *(iter++) << ' ' << *iter << endl;
 }
