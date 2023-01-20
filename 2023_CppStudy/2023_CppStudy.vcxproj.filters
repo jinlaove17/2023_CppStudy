@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\BingoGame">
+      <UniqueIdentifier>{2353cbd5-4a20-4a32-8ebb-f8425549fb6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\BingoGame">
+      <UniqueIdentifier>{8d7d3a59-3e0e-41a4-83cb-e66734052386}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -20,6 +26,24 @@
     </ClCompile>
     <ClCompile Include="func.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BingoGame.cpp">
+      <Filter>소스 파일\BingoGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>소스 파일\BingoGame</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일\BingoGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>소스 파일\BingoGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\BingoGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Computer.cpp">
+      <Filter>소스 파일\BingoGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +61,24 @@
     </ClInclude>
     <ClInclude Include="BST.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BingoGame.h">
+      <Filter>헤더 파일\BingoGame</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일\BingoGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>헤더 파일\BingoGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>헤더 파일\BingoGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>헤더 파일\BingoGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Computer.h">
+      <Filter>헤더 파일\BingoGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
